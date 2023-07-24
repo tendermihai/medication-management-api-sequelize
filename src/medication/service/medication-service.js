@@ -9,7 +9,7 @@ let getAll = asyncHandler(async (req, res) => {
 let addMedication = asyncHandler(async (req, res) => {
   let obj = req.body;
   await db.models.Medication.create(obj);
-  res.status(200).end();
+  res.status(200).end("Medication has been successfully added.");
 });
 
 let deleteMedication = asyncHandler(async (req, res) => {
@@ -20,7 +20,9 @@ let deleteMedication = asyncHandler(async (req, res) => {
   if (medication) {
     await medication.destroy();
   }
-  res.status(200).end();
+  res
+    .status(200)
+    .end(`Medication with ID ${id} has been successfully deleted.`);
 });
 
 const updateMedication = asyncHandler(async (req, res) => {
@@ -32,8 +34,8 @@ const updateMedication = asyncHandler(async (req, res) => {
     medication.set(obj);
   }
 
-  medication.save();
-  res.status(200).end();
+  await medication.save();
+  res.status(200).end("Medication has been successfully updated.");
 });
 
 const getMedById = asyncHandler(async (req, res) => {
