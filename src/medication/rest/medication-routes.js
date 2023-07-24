@@ -23,8 +23,11 @@ function asyncHandler(cb) {
 }
 
 app.route("/all").get(getAll, errorHandler);
+
 app.route("/add").post(addMedication, errorHandler);
+
 app.route("/delete/:id").delete(deleteMedication, errorHandler);
+
 app.route(`/update/:id`).put(updateMedication, errorHandler);
 
 export default app;
